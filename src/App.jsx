@@ -422,4 +422,145 @@ export default function App() {
                         </div>
                       </div>
 
-                      <div className="fl
+                      <div className="flex items-center space-x-2">
+                        {isEditingStats ? (
+                          <>
+                            <button
+                              onClick={handleSaveStats}
+                              className="bg-emerald-600 hover:bg-emerald-500 text-white px-3 py-1.5 rounded-xl text-xs font-bold flex items-center space-x-1.5"
+                            >
+                              <Save className="w-3.5 h-3.5" />
+                              <span>Save</span>
+                            </button>
+                            <button
+                              onClick={() => setIsEditingStats(false)}
+                              className="bg-slate-800 hover:bg-slate-700 text-slate-300 px-3 py-1.5 rounded-xl text-xs font-bold"
+                            >
+                              Cancel
+                            </button>
+                          </>
+                        ) : (
+                          <button
+                            onClick={() => startEditing(currentPlayer)}
+                            className="bg-indigo-600 hover:bg-indigo-500 text-white px-3 py-1.5 rounded-xl text-xs font-bold flex items-center space-x-1.5"
+                          >
+                            <Edit3 className="w-3.5 h-3.5" />
+                            <span>Edit Stats</span>
+                          </button>
+                        )}
+                      </div>
+                    </div>
+
+                    {isEditingStats ? (
+                      <form onSubmit={handleSaveStats} className="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-4 animate-fadeIn">
+                        <div className="grid grid-cols-2 gap-4">
+                          <div>
+                            <label className="block text-xs font-medium text-slate-400 mb-1 uppercase tracking-wider">Runs</label>
+                            <input
+                              type="number"
+                              value={editForm.runs ?? 0}
+                              onChange={(e) => setEditForm({ ...editForm, runs: Number(e.target.value) })}
+                              className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-rose-500"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-xs font-medium text-slate-400 mb-1 uppercase tracking-wider">Outs</label>
+                            <input
+                              type="number"
+                              value={editForm.outs ?? 0}
+                              onChange={(e) => setEditForm({ ...editForm, outs: Number(e.target.value) })}
+                              className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-rose-500"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-xs font-medium text-slate-400 mb-1 uppercase tracking-wider">Batting Average</label>
+                            <input
+                              type="number"
+                              step="0.01"
+                              value={editForm.battingAverage ?? 0}
+                              onChange={(e) => setEditForm({ ...editForm, battingAverage: Number(e.target.value) })}
+                              className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-rose-500"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-xs font-medium text-slate-400 mb-1 uppercase tracking-wider">Strike Rate</label>
+                            <input
+                              type="number"
+                              step="0.01"
+                              value={editForm.strikeRate ?? 0}
+                              onChange={(e) => setEditForm({ ...editForm, strikeRate: Number(e.target.value) })}
+                              className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-rose-500"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-xs font-medium text-slate-400 mb-1 uppercase tracking-wider">Wickets</label>
+                            <input
+                              type="number"
+                              value={editForm.wickets ?? 0}
+                              onChange={(e) => setEditForm({ ...editForm, wickets: Number(e.target.value) })}
+                              className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-rose-500"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-xs font-medium text-slate-400 mb-1 uppercase tracking-wider">Economy</label>
+                            <input
+                              type="number"
+                              step="0.01"
+                              value={editForm.economy ?? 0}
+                              onChange={(e) => setEditForm({ ...editForm, economy: Number(e.target.value) })}
+                              className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-rose-500"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-xs font-medium text-slate-400 mb-1 uppercase tracking-wider">Catches</label>
+                            <input
+                              type="number"
+                              value={editForm.catches ?? 0}
+                              onChange={(e) => setEditForm({ ...editForm, catches: Number(e.target.value) })}
+                              className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-rose-500"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-xs font-medium text-slate-400 mb-1 uppercase tracking-wider">Run Outs</label>
+                            <input
+                              type="number"
+                              value={editForm.runOuts ?? 0}
+                              onChange={(e) => setEditForm({ ...editForm, runOuts: Number(e.target.value) })}
+                              className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-rose-500"
+                            />
+                          </div>
+                        </div>
+                      </form>
+                    ) : (
+                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-4 text-center">
+                          <Flame className="w-5 h-5 text-rose-500 mx-auto mb-1" />
+                          <p className="text-xl font-black">{currentPlayer?.runs}</p>
+                          <p className="text-[10px] text-slate-400 uppercase tracking-wider">Runs</p>
+                        </div>
+                        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-4 text-center">
+                          <Shield className="w-5 h-5 text-indigo-400 mx-auto mb-1" />
+                          <p className="text-xl font-black">{currentPlayer?.wickets}</p>
+                          <p className="text-[10px] text-slate-400 uppercase tracking-wider">Wickets</p>
+                        </div>
+                        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-4 text-center">
+                          <p className="text-xl font-black">{currentPlayer?.battingAverage}</p>
+                          <p className="text-[10px] text-slate-400 uppercase tracking-wider">Batting Avg</p>
+                        </div>
+                        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-4 text-center">
+                          <p className="text-xl font-black">{currentPlayer?.economy}</p>
+                          <p className="text-[10px] text-slate-400 uppercase tracking-wider">Economy</p>
+                        </div>
+                      </div>
+                    )}
+                  </>
+                )}
+              </div>
+            )}
+          </>
+        )}
+      </main>
+    </div>
+  );
+}
+
